@@ -1,83 +1,155 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>D'Bregas Drama Band | Links Oficiais</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#0b0b0b" name="theme-color"/>
+<title>DBregas Drama Band | O melhor do brega, da música popular brasileira de boteco e da nostalgia</title>
+<meta content="DBregas Drama Band. O melhor do brega, da música popular brasileira de boteco e da nostalgia em um show inesquecível para bares, eventos, casas de shows e festivais." name="description"/>
+<!-- Ícone -->
+<link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;rect width='100' height='100' rx='22' fill='%230b0b0b'/&gt;&lt;text x='50' y='72' font-size='60' font-family='Georgia,serif' fill='%23c49b4b' text-anchor='middle'&gt;VS&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
+<!-- Open Graph / redes sociais -->
+<!-- Se um domínio próprio for configurado, atualizar og:url e og:image para o novo endereço -->
+<meta content="website" property="og:type"/>
+<meta content="https://dbregasdramaband.com" property="og:url"/>
+<meta content="DBregas Drama Band" property="og:title"/>
+<meta content="DBregas Drama Band. O melhor do brega, da música popular brasileira de boteco e da nostalgia em um show inesquecível para bares, eventos, casas de shows e festivais." property="og:description"/>
+<meta content="https://vanessasollo.github.io/vanessasollo/assets/img/hero.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&amp;family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet"/>
+<!-- CSS -->
+<link href="style.css" rel="stylesheet"/>
 </head>
 <body>
-
-    <div class="wrapper">
-        <!-- CABEÇALHO (Logo oficial da banda) -->
-        <header class="header-section">
-            <img src="LOGO D BREGAS OFICIAL FINAL 1.png" alt="D'Bregas Drama Band Logo" class="profile-avatar">
-            <h1>D'Bregas Drama Band</h1>
-            <p class="tagline">O espetáculo do brega, drama e paixão! 💔🍹🎤</p>
-        </header>
-
-        <!-- FOTO DA BANDA SEM FUNDO -->
-        <section class="band-photo-container">
-            <img src="foto-banda.png" alt="D'Bregas Drama Band Integrantes" class="band-photo">
-        </section>
-
-        <!-- AGENDA DE SHOWS (Carregada dinamicamente pelo arquivo agenda.json) -->
-        <section class="agenda-container">
-            <h2>📅 AGENDA DE SHOWS</h2>
-            <div id="agenda-shows">
-                <!-- Os shows vão aparecer aqui de forma dinâmica -->
-            </div>
-        </section>
-
-        <!-- BOTÕES DE LINK (Estilo Linktree) -->
-        <main class="links-container">
-            
-            <!-- Botão do Vídeo que abre em Modal (Popup) -->
-            <button id="open-video-btn" class="link-btn video-destaque">
-                <span>🎥 ASSISTIR VÍDEO DE APRESENTAÇÃO</span>
-            </button>
-
-            <a href="https://wa.me/SEUNUMERO" target="_blank" class="link-btn destaque">
-                <span>📅 CONTRATE NOSSO SHOW (WhatsApp)</span>
-            </a>
-
-            <a href="https://www.instagram.com/dbregasdramaband/" target="_blank" class="link-btn">
-                <span>📸 Acompanhe no Instagram</span>
-            </a>
-
-            <a href="https://www.youtube.com/@dbregasdramaband" target="_blank" class="link-btn">
-                <span>🔺 Nosso Canal no YouTube</span>
-            </a>
-
-            <a href="https://open.spotify.com/" target="_blank" class="link-btn">
-                <span>🎵 Ouça no Spotify</span>
-            </a>
-
-            <a href="mailto:contato@email.com" class="link-btn">
-                <span>✉️ Email para Imprensa & Parcerias</span>
-            </a>
-
-        </main>
-
-        <!-- RODAPÉ -->
-        <footer class="footer-section">
-            <p>© 2026 D'Bregas Drama Band. Todos os direitos reservados.</p>
-        </footer>
-    </div>
-
-    <!-- ESTRUTURA DO POPUP / MODAL -->
-    <div id="video-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">×</span>
-            <div class="video-wrapper">
-                <iframe id="video-iframe" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
+<!-- ==========================
+         HEADER
+    =========================== -->
+<header class="header">
+<a class="logo" href="#">DBregas Drama Band</a>
+<nav aria-label="Redes sociais">
+<a aria-label="Instagram da DBregas Drama Band" href="https://www.instagram.com/dbregasdramaband/" rel="noopener noreferrer" target="_blank">
+<i aria-hidden="true" class="fa-brands fa-instagram"></i>
+</a>
+<a aria-label="YouTube da DBregas Drama Band" href="https://www.youtube.com/@DbregasDB" rel="noopener noreferrer" target="_blank">
+<i aria-hidden="true" class="fa-brands fa-youtube"></i>
+</a>
+<a aria-label="WhatsApp de Vanessa Sollo" href="https://wa.me/5548991721907?text=Olá!%20Gostaria%20de%20contratar%20a%20DBregas%20Drama%20Band." rel="noopener noreferrer" target="_blank">
+<i aria-hidden="true" class="fa-brands fa-whatsapp"></i>
+</a>
+<a aria-label="Enviar e-mail para Vanessa Sollo" href="mailto:monica.moniarte@gmail.com">
+<i aria-hidden="true" class="fa-regular fa-envelope"></i>
+</a>
+</nav>
+</header>
+<!-- ==========================
+         HERO
+    =========================== -->
+<section class="hero">
+<img alt="DBregas Drama Band" class="hero-image" src="assets/img/hero.png"/>
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<h1>DBregas<br/>Drama Band</h1>
+<p>O melhor do brega, da música popular brasileira de boteco e da nostalgia em um show inesquecível.</p>
+<div class="categoria">Bares • Casas de Show • Eventos • Festivais</div>
+<div class="hero-buttons">
+<a class="btn-principal" href="#agenda">Próximas apresentações</a>
+<button class="btn-secundario" id="abrirVideo" type="button">
+<i aria-hidden="true" class="fa-solid fa-circle-play"></i>
+                    Vídeo de Apresentação
+                </button>
+</div>
+<a class="hero-contact" href="https://wa.me/5548991721907?text=Olá!%20Gostaria%20de%20contratar%20a%20DBregas%20Drama%20Band." rel="noopener noreferrer" target="_blank">💬 Solicite um orçamento<span>Shows • Eventos • Festivais • Bares</span></a>
+</div>
+</section>
+<!-- ==========================
+         VÍDEO (TEASER)
+    =========================== -->
+<section class="section video-section" id="video">
+<span class="subtitulo">ASSISTA</span>
+<h2>Vídeo de Apresentação</h2>
+<div class="video-frame" data-yt="rqvDPaIMFXs">
+<button aria-label="Reproduzir o vídeo de apresentação" class="video-facade" type="button">
+<img alt="" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/w0lMLn69Ebg/hqdefault.jpg';" src="https://i.ytimg.com/vi/rqvDPaIMFXs/sddefault.jpg"/>
+<span aria-hidden="true" class="video-play">
+<i class="fa-solid fa-play"></i>
+</span>
+</button>
+</div>
+</section>
+<!-- ==========================
+         AGENDA
+    =========================== -->
+<section class="section" id="agenda">
+<div class="section-header">
+<div>
+<span class="subtitulo">AGENDA</span>
+<h2>Próximos Shows</h2>
+</div>
+<div class="carousel-buttons">
+<button aria-label="Ver shows anteriores" id="prev" type="button">
+<i aria-hidden="true" class="fa-solid fa-chevron-left"></i>
+</button>
+<button aria-label="Ver próximos shows" id="next" type="button">
+<i aria-hidden="true" class="fa-solid fa-chevron-right"></i>
+</button>
+</div>
+</div>
+<div class="agenda-container" id="agenda-container">
+<!-- Cards carregados via script.js -->
+</div>
+</section>
+<!-- ==========================
+         RELEASE
+    =========================== -->
+<section class="section" id="release">
+<span class="subtitulo">SOBRE</span>
+<h2>DBregas Drama Band</h2>
+<div class="release">
+<p>A DBregas Drama Band reúne clássicos do brega, da música popular brasileira de boteco e sucessos que marcaram gerações em um espetáculo vibrante, divertido e cheio de interação com o público.</p>
+<p>Com repertório pensado para bares, casas de shows, festivais e eventos, a banda transforma cada apresentação em uma grande celebração da música, da nostalgia e das boas lembranças.</p>
+</div>
+</section>
+<!-- ==========================
+         MODAL DO VÍDEO
+    =========================== -->
+<div aria-label="Vídeo de apresentação de Vanessa Sollo" aria-modal="true" class="modal" id="videoModal" role="dialog">
+<div class="modal-content">
+<button aria-label="Fechar vídeo" class="fechar" id="fecharVideo" type="button">
+<i aria-hidden="true" class="fa-solid fa-xmark"></i>
+</button>
+<div class="modal-body" id="videoModalBody"></div>
+</div>
+</div>
+<!-- ==========================
+         RODAPÉ
+    =========================== -->
+<footer>
+<div class="footer-logo">DBregas Drama Band</div>
+<p>Brega • MPB de Boteco • Nostalgia</p>
+<p>Florianópolis • Santa Catarina • Brasil</p>
+<nav aria-label="Redes sociais" class="footer-social">
+<a aria-label="Instagram da DBregas Drama Band" href="https://www.instagram.com/dbregasdramaband/" rel="noopener noreferrer" target="_blank">
+<i aria-hidden="true" class="fa-brands fa-instagram"></i>
+</a>
+<a aria-label="YouTube da DBregas Drama Band" href="https://www.youtube.com/@DbregasDB" rel="noopener noreferrer" target="_blank">
+<i aria-hidden="true" class="fa-brands fa-youtube"></i>
+</a>
+<a aria-label="WhatsApp de Vanessa Sollo" href="https://wa.me/5548991721907?text=Olá!%20Gostaria%20de%20contratar%20a%20DBregas%20Drama%20Band." rel="noopener noreferrer" target="_blank">
+<i aria-hidden="true" class="fa-brands fa-whatsapp"></i>
+</a>
+<a aria-label="Enviar e-mail para Vanessa Sollo" href="mailto:monica.moniarte@gmail.com">
+<i aria-hidden="true" class="fa-regular fa-envelope"></i>
+</a>
+</nav>
+<p class="copyright">© 2026 DBregas Drama Band • Todos os direitos reservados.</p>
+</footer>
+<!-- JavaScript -->
+<script src="script.js"></script>
 </body>
 </html>

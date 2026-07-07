@@ -1,64 +1,212 @@
-// --- CONTROLE DO POPUP DO VÍDEO ---
-const modal = document.getElementById('video-modal');
-const openBtn = document.getElementById('open-video-btn');
-const closeBtn = document.querySelector('.close-btn');
-const videoIframe = document.getElementById('video-iframe');
+// ==========================================
+// VANESSA SOLLO — SCRIPT.JS
+// ==========================================
 
-const youtubeEmbedUrl = "https://www.youtube.com/embed/rqvDPaIMFXs?autoplay=1";
+const YT_ID = "rqvDPaIMFXs";
 
-openBtn.addEventListener('click', () => {
-    modal.style.display = 'flex';
-    videoIframe.src = youtubeEmbedUrl;
-});
+// Cria o iframe do YouTube (privacy-friendly: youtube-nocookie)
+function buildYouTubeIframe(autoplay) {
+    const params = new URLSearchParams({
+        autoplay: autoplay ? "1" : "0",
+        rel: "0",
+        modestbranding: "1",
+        playsinline: "1"
+    });
 
-closeBtn.addEventListener('click', () => {
-    modal.style.display = 'none';
-    videoIframe.src = "";
-});
+    const iframe = document.createElement("iframe");
+    iframe.src = `https://www.youtube-nocookie.com/embed/${YT_ID}?${params.toString()}`;
+    iframe.title = "Vídeo de apresentação — DBregas Drama Band";
+    iframe.allow =
+        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    iframe.allowFullscreen = true;
+    iframe.loading = "lazy";
+    return iframe;
+}
 
-window.addEventListener('click', (e) => {
-    if (e.target === modal) {
-        modal.style.display = 'none';
-        videoIframe.src = "";
-    }
-});
+// -------------------------------
+// AGENDA (carregada do JSON)
+// -------------------------------
 
+const agendaContainer = document.getElementById("agenda-container");
 
-// --- CARREGAMENTO DINÂMICO DA AGENDA (.JSON) ---
-document.addEventListener("DOMContentLoaded", () => {
-    const agendaContainer = document.getElementById("agenda-shows");
+if (agendaContainer) {
 
-    // Busca o arquivo agenda.json que está na mesma pasta
     fetch("agenda.json")
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Erro ao carregar o arquivo de agenda.");
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(shows => {
-            // Se a agenda estiver vazia no JSON
-            if (shows.length === 0) {
-                agendaContainer.innerHTML = '<p style="text-align:center; font-size:13px; color:#bfa3a6;">Nenhum show agendado no momento.</p>';
-                return;
-            }
 
-            // Limpa o container e monta os shows linha por linha
-            agendaContainer.innerHTML = "";
-            shows.forEach(show => {
-                const showItem = document.createElement("div");
-                showItem.className = "show-item";
-                
-                showItem.innerHTML = `
-                    <span class="show-date">${show.data}</span>
-                    <span class="show-local">${show.local}</span>
-                `;
-                
-                agendaContainer.appendChild(showItem);
+            shows.forEach((show, index) => {
+
+const imagemShow = show.banner
+    ? `<img src="assets/agenda/${show.banner}" alt="Show da DBregas Drama Band — ${show.local}" loading="lazy">`
+    : "";
+
+const botaoIngresso = show.ingresso
+    ? `<a href="${show.ingresso}" target="_blank" rel="noopener noreferrer" class="btn-ingresso">Comprar ingresso</a>`
+    : "";
+
+const card = document.createElement("div");
+card.className = "card-show";
+card.style.animationDelay = `${index * 0.15}s`;
+
+card.innerHTML = `
+    ${imagemShow}
+
+    <div class="card-info">
+
+        <div class="card-data">${show.data}</div>
+
+        <div class="card-local">${show.local}</div>
+
+        <div class="card-cidade">
+            <i class="fa-solid fa-location-dot"></i>
+            ${show.cidade}
+        </div>
+
+        <div class="card-hora">
+            <i class="fa-regular fa-clock"></i>
+            ${show.hora}
+        </div>
+
+        ${botaoIngresso}
+
+    </div>
+`;
+
+                agendaContainer.appendChild(card);
             });
         })
         .catch(error => {
-            console.error("Erro:", error);
-            agendaContainer.innerHTML = '<p style="text-align:center; font-size:13px; color:#ff073a;">Erro ao carregar os próximos shows.</p>';
+            console.error("Erro ao carregar agenda:", error);
+            agendaContainer.innerHTML =
+                `<p class="agenda-erro">Não foi possível carregar a agenda no momento.</p>`;
         });
-});
+}
+
+// ----------------------------------
+// CARROSSEL DA AGENDA
+// ----------------------------------
+
+const btnNext = document.getElementById("next");
+const btnPrev = document.getElementById("prev");
+
+function scrollAgenda(amount) {
+    if (agendaContainer) {
+        agendaContainer.scrollBy({ left: amount, behavior: "smooth" });
+    }
+}
+
+if (btnNext) btnNext.addEventListener("click", () => scrollAgenda(380));
+if (btnPrev) btnPrev.addEventListener("click", () => scrollAgenda(-380));
+
+// ----------------------------------
+// VÍDEO — SEÇÃO INLINE (facade)
+// ----------------------------------
+// Carrega o iframe pesado do YouTube só ao clicar, mantendo a página leve.
+
+const inlineFacade = document.querySelector("#video .video-facade");
+
+if (inlineFacade) {
+    inlineFacade.addEventListener("click", () => {
+        const frame = inlineFacade.closest(".video-frame");
+        if (frame) frame.replaceChildren(buildYouTubeIframe(true));
+    });
+}
+
+// ----------------------------------
+// VÍDEO — MODAL (botão do hero)
+// ----------------------------------
+
+const openVideoBtn = document.getElementById("abrirVideo");
+const closeVideoBtn = document.getElementById("fecharVideo");
+const modal = document.getElementById("videoModal");
+const modalBody = document.getElementById("videoModalBody");
+
+let lastFocusedEl = null;
+
+function openModal() {
+    if (!modal || !modalBody) return;
+    lastFocusedEl = document.activeElement;
+    modalBody.replaceChildren(buildYouTubeIframe(true));
+    modal.classList.add("open");
+    document.body.style.overflow = "hidden";
+    if (closeVideoBtn) closeVideoBtn.focus();
+}
+
+function closeModal() {
+    if (!modal) return;
+    modal.classList.remove("open");
+    modalBody.replaceChildren(); // remove o iframe -> interrompe a reprodução
+    document.body.style.overflow = "";
+    if (lastFocusedEl) lastFocusedEl.focus();
+}
+
+if (openVideoBtn && modal && modalBody) {
+
+    openVideoBtn.addEventListener("click", openModal);
+
+    if (closeVideoBtn) closeVideoBtn.addEventListener("click", closeModal);
+
+    // Fecha ao clicar fora do conteúdo
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    // Fecha com Esc e mantém o foco preso no botão de fechar
+    document.addEventListener("keydown", (e) => {
+        if (!modal.classList.contains("open")) return;
+        if (e.key === "Escape") {
+            closeModal();
+        } else if (e.key === "Tab" && closeVideoBtn) {
+            e.preventDefault();
+            closeVideoBtn.focus();
+        }
+    });
+}
+
+// ----------------------------------
+// HEADER AO ROLAR
+// ----------------------------------
+
+const header = document.querySelector(".header");
+
+if (header) {
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+            header.style.background = "rgba(7,25,35,.92)";
+            header.style.backdropFilter = "blur(12px)";
+        } else {
+            header.style.background =
+                "linear-gradient(to bottom, rgba(7,25,35,.88), transparent)";
+            header.style.backdropFilter = "none";
+        }
+    });
+}
+
+
+// ===============================
+// REVEAL ANIMATION
+// ===============================
+const revealItems=document.querySelectorAll(".section,.card-show");
+const revealObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+    }
+  });
+},{threshold:.15});
+
+revealItems.forEach(el=>revealObserver.observe(el));
+
+// ===============================
+// HERO PARALLAX
+// ===============================
+const heroImage=document.querySelector(".hero-image");
+
+if(heroImage && window.innerWidth>900){
+  document.addEventListener("mousemove",(e)=>{
+    const x=(e.clientX/window.innerWidth-.5)*8;
+    const y=(e.clientY/window.innerHeight-.5)*8;
+    heroImage.style.transform=`translate(${x}px,${y}px)`;
+  });
+}
